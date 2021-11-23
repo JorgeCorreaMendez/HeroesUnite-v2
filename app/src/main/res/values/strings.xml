@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HeroesUnite</string>
+    <string name="launcher">Launcher</string>
+    <string name="clear">Clear</string>
+    <string name="actualURL">Url a acceder</string>
+    <string name="dataHeroe">Aqui se mostraran los datos de los heroes a acceder</string>
 </resources>
