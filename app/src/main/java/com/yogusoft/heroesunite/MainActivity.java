@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.yogusoft.heroesunite.utils.NewtworkUtils;
+import com.yogusoft.heroesunite.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             String gitHubSearchResults = null;
 
             try {
-                gitHubSearchResults = NewtworkUtils.getResponseFromHttpUrl(searchUrl);
+                gitHubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,12 +79,13 @@ public class MainActivity extends AppCompatActivity {
         int launcherId = item.getItemId();
 
         if (launcherId == R.id.launcher) {
+            heroesResult.setText("");
             Log.i("MainActivity", "El usuario a pulsado launcher");
 
-            URL superheroe_Url = NewtworkUtils.bluidUrlAllSuperHeroes();
-            urlDisplay.setText(superheroe_Url.toString());
+            URL superhero_Url = NetworkUtils.buildUrlAllSuperHeroes();
+            urlDisplay.setText(superhero_Url.toString());
 
-            new GithubQueryTask().execute(superheroe_Url);
+            new GithubQueryTask().execute(superhero_Url);
         }
 
         if (launcherId == R.id.clear) {

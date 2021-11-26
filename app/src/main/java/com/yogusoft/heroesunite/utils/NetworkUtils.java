@@ -10,14 +10,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class NewtworkUtils {
+public class NetworkUtils {
     final static String SUPERHERO_BASE_URL = "https://akabab.github.io/superhero-api/api";
     final static String ALL_SUPERHEROES_URL = "/all.json";
 
     static int id;
-    final static String SEARCH_SUPERHEROE_URS = "/id/" + id + ".json";
+    final static String SEARCH_SUPERHERO_URS = "/id/" + id + ".json";
 
-    public static URL bluidUrlAllSuperHeroes() {
+    public static URL buildUrlAllSuperHeroes() {
         Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + ALL_SUPERHEROES_URL).buildUpon().build();
         URL url = null;
 
@@ -31,9 +31,10 @@ public class NewtworkUtils {
         return url;
     }
 
-    public static URL bluidUrlSearchSuperHeroe(int heroeId) {
-        id = heroeId;
-        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + SEARCH_SUPERHEROE_URS).buildUpon().build();
+    // Este metodo no se utiliza
+    public static URL buildUrlSearchSuperHero(int heroId) {
+        id = heroId;
+        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + SEARCH_SUPERHERO_URS).buildUpon().build();
 
         URL url = null;
 
