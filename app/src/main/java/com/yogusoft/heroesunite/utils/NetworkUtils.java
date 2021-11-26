@@ -15,10 +15,10 @@ public class NetworkUtils {
     final static String ALL_SUPERHEROES_URL = "/all.json";
 
     static int id;
-    final static String SEARCH_SUPERHERO_URS = "/id/" + id + ".json";
+    static String SEARCH_SUPERHERO_URS = "/id/" + id + ".json";
 
     public static URL buildUrlAllSuperHeroes() {
-        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + ALL_SUPERHEROES_URL).buildUpon().build();
+        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL).buildUpon().appendPath(ALL_SUPERHEROES_URL).build();
         URL url = null;
 
         try {
@@ -34,7 +34,7 @@ public class NetworkUtils {
     // Este metodo no se utiliza
     public static URL buildUrlSearchSuperHero(int heroId) {
         id = heroId;
-        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + SEARCH_SUPERHERO_URS).buildUpon().build();
+        Uri builtUri = Uri.parse(SUPERHERO_BASE_URL).buildUpon().appendPath(SEARCH_SUPERHERO_URS).build();
 
         URL url = null;
 
