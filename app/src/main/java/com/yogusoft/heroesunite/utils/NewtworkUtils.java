@@ -17,7 +17,7 @@ public class NewtworkUtils {
     static int id;
     final static String SEARCH_SUPERHEROE_URS = "/id/" + id + ".json";
 
-    public static URL bluidUrlAllSuperHeroes(){
+    public static URL bluidUrlAllSuperHeroes() {
         Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + ALL_SUPERHEROES_URL).buildUpon().build();
         URL url = null;
 
@@ -31,7 +31,7 @@ public class NewtworkUtils {
         return url;
     }
 
-    public static URL bluidUrlSearchSuperHeroe(int heroeId){
+    public static URL bluidUrlSearchSuperHeroe(int heroeId) {
         id = heroeId;
         Uri builtUri = Uri.parse(SUPERHERO_BASE_URL + SEARCH_SUPERHEROE_URS).buildUpon().build();
 
@@ -56,8 +56,13 @@ public class NewtworkUtils {
         read.useDelimiter("\\A");
 
         try {
-            if (read.hasNext()) return read.next();
-            else return null;
+            boolean hasInput = read.hasNext();
+
+            if (hasInput) {
+                return read.next();
+            } else {
+                return null;
+            }
         } finally {
             urlConnection.disconnect();
         }

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yogusoft.heroesunite.utils.NewtworkUtils;
@@ -18,6 +20,9 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     TextView urlDisplay;
     TextView heroesResult;
+    TextView errorMessageDisplay;
+
+    ProgressBar requestProgress;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class GithubQueryTask extends AsyncTask<URL, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            requestProgress.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -43,13 +53,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if (s != null && !s.isEmpty()) {
+            requestProgress.setVisibility(View.INVISIBLE);
+
+            if (s != null) {
+                showJsonData();
                 heroesResult.setText(s);
             } else {
-                heroesResult.setText("Error al obtener respuesta");
-                Log.i("MainActivity", s);
+                showErrorMessage();
             }
         }
+    }
+
+    private void showJsonData() {
+        errorMessageDisplay.setVisibility(View.INVISIBLE);
+        heroesResult.setVisibility(View.VISIBLE);
+    }
+
+    private void showErrorMessage() {
+        errorMessageDisplay.setVisibility(View.VISIBLE);
+        heroesResult.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -65,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
             new GithubQueryTask().execute(superheroe_Url);
         }
 
-        if (launcherId == R.id.clear) heroesResult.setText("");
+        if (launcherId == R.id.clear) {
+            heroesResult.setText("");
+            errorMessageDisplay.setVisibility(View.INVISIBLE);
+        }
 
         return true;
     }
@@ -77,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
         urlDisplay = (TextView) findViewById(R.id.urlDisplay);
         heroesResult = (TextView) findViewById(R.id.superheroe_searchResult);
+        errorMessageDisplay = (TextView) findViewById(R.id.error_message_display);
+
+        requestProgress = (ProgressBar) findViewById(R.id.request_progress);
     }
 
 }
