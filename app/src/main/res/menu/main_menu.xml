@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
-        android:title="@string/launcher"
+        android:id="@+id/launcher"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/launcher"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/clear"
-        android:title="@string/clear"
         android:orderInCategory="2"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/clear"
+        app:showAsAction="ifRoom" />
 </menu>
